@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans&display=swap" rel="stylesheet" />
+    <link href="./createPoll.css" rel="stylesheet" />
+    <title>EmpathyPolls</title>
+</head>
+
+<body>
+    <div class="titleContainer">
+    <div class="landingTitle">
+       <h1> What are you planning? </h1>
+    </div>
+    </div>
+    <div class="parameters">
+        <div class="section">
+            <div class="sectionTitle"><h2>Occassion:</h2></div>
+            <input type="text" id="occassion" name="occassion">
+        </div>
+        <div class="section">
+            <div class="sectionTitle"><h2>Location:</h2></div>
+            <input type="text" id="location" name="location">
+        </div>
+        <div class="section">
+            <div class="sectionTitle"><h2>Mandatory:</h2></div>
+            <div class="wrapper">
+                <input type="radio" name="mandatory" checked><p>Yes</p></input>
+                <input type="radio" name="mandatory"><p>No</p></input>
+            </div>
+        </div>
+        <div class="section">
+            <div class="sectionTitle"><h2>Make responses public?:</h2></div>
+            <div class="wrapper">
+                <input type="radio" name="yes_no" checked><p>Yes</p></input>
+                <input type="radio" name="yes_no"><p>No</p></input>
+            </div>
+        </div>
+        <div class="section">
+            <div class="sectionTitle"><h2>Notes:</h2></div>
+            <input type="text" id="notes" name="notes">
+        </div>
+    </div>
+       <div class="btnContainer">
+        <a href="http://programminghead.com">
+           <button class="landingBtn">Next</button>
+        </a>
+    </div>
+</div>
+</body>
+<script src="empathy.js"></script>
+
+</html>

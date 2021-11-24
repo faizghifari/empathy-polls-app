@@ -1,0 +1,33 @@
+h1 {
+    font-family: "Ropa Sans", sans-serif;
+    font-size: 100px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.landingTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.landingBtn {
+    background-color: #1550AA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 45px;
+    font-family: "Ropa Sans", sans-serif;
+}
+
+.landingBtn:hover {
+    cursor: pointer;
+}

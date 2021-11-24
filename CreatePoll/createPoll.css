@@ -1,0 +1,65 @@
+* {
+    font-family: "Ropa Sans", sans-serif;
+}
+
+h1 {
+    font-size: 75px;
+    margin: 25px;
+}
+
+h2 {
+    font-size: 40px;
+    margin: 25px;
+}
+
+p {
+    font-size: 35px;
+    margin: 0 15px; 
+}
+
+.section {
+    align-items: center;
+    display: flex;
+    flex-flow: row;
+}
+
+.landingBtn {
+    background-color: #1550AA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    font-family: "Ropa Sans", sans-serif;
+    margin: 25px;
+    width: 150px;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+input[type=text] {
+    width: 60%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 25px;
+  }
+
+input[type='radio'] { 
+    transform: scale(2); 
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    
+  }
