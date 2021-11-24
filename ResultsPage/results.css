@@ -1,0 +1,71 @@
+* {
+    font-family: "Ropa Sans", sans-serif;
+}
+
+h1 {
+    font-size: 65px;
+    margin: 25px;
+}
+
+h2 {
+    font-size: 40px;
+    margin: 25px;
+}
+
+p {
+    font-size: 20px;
+    margin: 0 15px; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bestChoice {
+    background-color: #2674BC;
+    width: 50%;
+    height: auto;
+    padding: 0 15px 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.alt {
+    font-size: 50px;
+    margin-top: 40px;
+}
+
+.altOne {
+    background-color: lightgray;
+    width: 50%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.altOneAttendance {
+    margin-left: 25px;
+}
+
+.altTwo {
+    background-color: lightgray;
+    width: 50%;
+    height: auto;
+}
+
+.altTwoAttendance {
+    margin-left: 25px;
+}
+
+.group {
+    font-style: italic;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding-bottom: 20px;
+}
