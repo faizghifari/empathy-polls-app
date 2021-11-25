@@ -1,0 +1,93 @@
+.ep-fcell {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+
+.ep-cell {
+    height: 50px;
+    padding-top: 7px;
+    padding-left: 10px;
+    font-size: 24px;
+}
+
+.of-x {
+    overflow-x: scroll !important;
+}
+
+#ep_selector_wrapper {
+    display: flex;
+    flex-flow: wrap;
+}
+#ep_selector_wrapper > br {
+    content: '';
+    width: 100%;
+}
+.cell-bd-h {
+    border-left: 1.5px solid white;
+    border-right: 1.5px solid white;
+}
+
+.cell-bd-r {
+    border-right: 2px solid white;
+}
+
+.cell-bd-t {
+    border-top: 0.5px solid white;
+}
+
+.cell-blue {
+    background-color: #1550AA;
+    color: white;
+}
+.cell-dgrey {
+    background-color: #a0a0a0;
+    color: white;
+    font-weight: bolder;
+}
+.cell-lgrey {
+    background-color: #e0e0e0;
+    color: black;
+}
+
+.cell-name {
+    font-size: 18px;
+    font-weight: bolder;
+}
+.cell-center {
+    padding-left: 0px;
+    text-align: center;
+}
+.row > * {
+    padding: 0 !important;
+}
+
+.dropdown-menu {
+    background: none !important;
+    border: none !important;
+    width: 150px;
+    min-width: unset;
+    transform: translateY(150px) !important;
+    z-index:1000000;
+}
+
+.dropdown-item {
+    min-height: 35px;
+}
+
+.cell-p1 {
+    background: green !important;
+}
+
+.cell-p2 {
+    background: yellow !important;
+}
+
+.cell-p3 {
+    background: orange !important;
+}
+
+.cell-p4 {
+    background: red !important;
+}
