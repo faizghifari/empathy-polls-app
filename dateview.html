@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="mg-2"></div>
-        <h2 id="ep_title">Event title will be go here</h2>
+        <h2 id="ep_title"></h2>
         <div class="row">
             <div class="col-2" id="ep_selector_attended">
                 <div class="mg-1"></div>
@@ -21,20 +21,26 @@
             <div class="col-10 of-x">
                 <div id="ep_selector_wrapper">
                 </div>
+                <div class="mg-2"></div>
                 <div class="mg-3"></div>
             </div>
+        </div>
+        <div>
+            <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit!</button>
         </div>
     </div>
 </div>
 </body>
-<script src="./sample_data.js"></script>
+<script src="./static/js/common.js"></script>
+<script src="./static/js/api.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
 
 const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 150px">`;
-function load() {
-    $("#ep_title").text(data.event_name);
+function load(data) {
+    $("#ep_title").text(`${data.event_name} @ ${data.place}`);
+    $("#ep_desc").text(`${data.notes}`);
 
     //Set width of selector wrapper first
     $("#ep_selector_wrapper").width(data.total_slots * 150);
@@ -42,6 +48,7 @@ function load() {
     
     //add date cells
     let times = [];
+    let slotids = [];
     for(let i = 0; i < data.slots.length; i++) {
         let o = data.slots[i];
         let w = o.times.length * 150;
@@ -50,6 +57,7 @@ function load() {
         for(let j = 0; j < o.times.length; j++) {
             let divstr = `<div class="ep-cell cell-dgrey cell-bd-h cell-bd-t" style="width: 150px">${o.times[j]}</div>`;
             times.push(divstr);
+            slotids.push(o.slotids[j]);
         }
     }
     //add time cells 
@@ -95,8 +103,8 @@ function load() {
     for(let i=0; i < data.total_slots; i++) {
         $("#ep_selector_wrapper").append(
             `<div class="dropdown">
-    <input type="hidden" class="_user_input_idx" value="${i}">
-    <input type="hidden" id="_user_select_${i}" value="">
+    <input type="hidden" class="_user_input_idx" value="${slotids[i]}">
+    <input type="hidden" id="_user_select_${slotids[i]}" value="4">
     <div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t" style="width: 150px;" data-bs-toggle="dropdown" aria-expanded="false">
         Select ▼
     </div>
@@ -118,7 +126,7 @@ function load() {
     for(let i=0; i < data.total_slots; i++) {
         $("#ep_selector_wrapper").append(
             `<div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t px-2" style="width: 150px">
-                <input type="text" id="_user_misc_${i}" class="form-control" placeholder="">    
+                <input type="text" id="_user_misc_${slotids[i]}" class="form-control" placeholder="">    
             </div>`
         )
     }
@@ -126,7 +134,19 @@ function load() {
     
 }
 $(() => {
-    load();
+    window.vote_id = location.hash.substring(1);
+    if(!window.vote_id) {
+        alert("Invalid access!");
+        history.back();
+        return;
+    }
+
+    getVoteDetail(window.vote_id)
+    .then(load)
+    .catch(() => {
+        alert("Invalid vote id");
+        history.back();
+    });
 });
 
 function user_priority(o) {
@@ -139,5 +159,25 @@ function user_priority(o) {
     dd_cell.addClass(`cell-p${selection}`);
     $(`#_user_select_${idx}`).val(selection);
 }
+
+$("#btn_submit").click(() => {
+    let voter_name = $("#input_name").val();
+
+    $("#btn_submit").text("Saving...");
+
+    //get all timeslots
+    let all_indexes = $("._user_input_idx");
+    for(let i = 0; i < all_indexes.length; i++) {
+        let t_id = all_indexes[i].value;
+        let priority = $(`#_user_select_${t_id}`).val();
+        let note = $(`#_user_misc_${t_id}`).val();
+
+        console.log(window.vote_id, t_id, voter_name, priority, note);
+        (async () => await saveTimeslot(window.vote_id, t_id, voter_name, parseInt(priority), note))();
+    }
+    alert("Done!");
+    location.reload();
+
+})
 </script>
 </html>

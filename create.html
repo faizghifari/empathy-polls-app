@@ -11,7 +11,7 @@
 <body>
     <div class="vh-100">
         <div class="v-center">
-            <h1 class="text-center display-2"> What are you planning?</h1>
+            <h1 class="text-center display-2">What are you planning?</h1>
             <div class="mg-0"></div>
             <div class="row g-3 align-items-center">
                 <div class="col-3">
@@ -78,6 +78,27 @@
         </div>
     </div>
 </div>
+<script src="./static/js/common.js"></script>
+<script src="./static/js/api.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script>
+$("#next").click(function() {
+    let title = $("#occasion").val();
+    let place = $("#location").val();
+    let mandatory = $('input[name="mandatory"]:checked').val() == "y";
+    let public = $('input[name="public"]:checked').val() == "y";
+    let notes = $("#notes").val();
+    
+    createVote(title, place, mandatory, public, notes)
+    .then(resp => {
+        if(!resp.uuid) {
+            alert("Failed to create a event");
+            return;
+        }
+        location.href = `${EP_HOST}/add_date.html#${resp.uuid}`;
+    })
+    return false;
+});
+</script>
 </body>
-
 </html>

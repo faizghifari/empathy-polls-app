@@ -68,7 +68,7 @@
     border: none !important;
     width: 150px;
     min-width: unset;
-    transform: translateY(150px) !important;
+    transform: translateY(45px) !important;
     z-index:1000000;
 }
 
