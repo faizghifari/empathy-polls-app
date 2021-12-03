@@ -4,12 +4,12 @@ from django.db import models
 
 class VoteSession(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
-    title = models.TextField(null=False)
-    place = models.TextField()
+    title = models.TextField(null=False, blank=False)
+    place = models.TextField(default="", blank=True)
     is_mandatory = models.BooleanField(default=False)
     open_public = models.BooleanField(default=True)
     is_finished = models.BooleanField(default=False)
-    notes = models.TextField()
+    notes = models.TextField(default="", blank=True)
 
     def __str__(self):
         return "%s: %s" % (self.title, self.uuid)
@@ -41,14 +41,15 @@ class Vote(models.Model):
     timeslot_id = models.ForeignKey(
         Timeslot, related_name="voted_timeslot", on_delete=models.CASCADE, null=False
     )
-    voter_name = models.CharField(max_length=50, null=False)
+    voter_name = models.CharField(max_length=50, null=False, blank=False)
     preferences = models.CharField(
         max_length=50,
         null=False,
+        blank=False,
         choices=PreferenceChoices.choices,
         default=PreferenceChoices.UNAVAILABLE,
     )
-    notes = models.TextField()
+    notes = models.TextField(default="", blank=True)
 
     class Meta:
         unique_together = ("session_id", "timeslot_id", "voter_name")
