@@ -88,11 +88,11 @@
         $("#next").click(function () {
             let title = $("#occasion").val();
             let place = $("#location").val();
-            // let mandatory = $('input[name="mandatory"]:checked').val() == "y";
+            let mandatory = false;
             let public = $('input[name="public"]:checked').val() == "y";
             let notes = $("#notes").val();
 
-            createVote(title, place, public, notes)
+            createVote(title, place, mandatory, public, notes)
                 .then(resp => {
                     if (!resp.uuid) {
                         alert("Failed to create a event");
