@@ -71,7 +71,7 @@ $("#btn_add").click(() => {
     createTimeslot(window.vote_id, str_val)
     .then(() => {
         updateDatelist()
-        .then(() => { alert("Done!") });
+        // .then(() => { alert("Done!") });
     })
     .catch(() => {
         alert("Fail to add a datetime");
@@ -80,6 +80,7 @@ $("#btn_add").click(() => {
 
 $("#btn_share").click(() => {
     prompt("Here is a link for sharing your event!", `${EP_HOST}/dateview.html#${window.vote_id}`);
+    window.open( `${EP_HOST}/dateview.html#${window.vote_id}`);
 });
 </script>
 </body>

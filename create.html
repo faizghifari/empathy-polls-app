@@ -30,7 +30,7 @@
                     <input type="text" id="location" class="form-control">
                 </div>
             </div>
-            <div class="mg-xs"></div>
+            <!-- <div class="mg-xs"></div>
             <div class="row g-3 align-items-center">
                 <div class="col-3">
                     <h2>Mandatory</h2>
@@ -45,7 +45,7 @@
                         <label class="form-check-label">No</label>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="mg-xs"></div>
             <div class="row g-3 align-items-center">
                 <div class="col-6">
@@ -85,11 +85,11 @@
 $("#next").click(function() {
     let title = $("#occasion").val();
     let place = $("#location").val();
-    let mandatory = $('input[name="mandatory"]:checked').val() == "y";
+    // let mandatory = $('input[name="mandatory"]:checked').val() == "y";
     let public = $('input[name="public"]:checked').val() == "y";
     let notes = $("#notes").val();
     
-    createVote(title, place, mandatory, public, notes)
+    createVote(title, place, public, notes)
     .then(resp => {
         if(!resp.uuid) {
             alert("Failed to create a event");
