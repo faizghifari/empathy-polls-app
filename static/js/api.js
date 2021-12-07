@@ -25,7 +25,7 @@ async function getVoteDetail(vote_id) {
     result = {
         'event_name': vote_detail.title,
         'place': vote_detail.place,
-       // 'is_mandatory': vote_detail.is_mandatory,
+        'is_mandatory': vote_detail.is_mandatory,
         'is_opened': vote_detail.open_public,
         'is_finished': vote_detail.is_finished,
         'notes': vote_detail.notes,
@@ -108,9 +108,9 @@ function parseVotes(votes) {
     return [voted_names, voted_results];
 }
 
-async function createVote(title, place, open_public, notes) {
+async function createVote(title, place, is_mandatory, open_public, notes) {
     return await window.httpPost(`${API_EVENT}/?format=json`, data = {
-        title, place, open_public, notes
+        title, place, is_mandatory, open_public, notes
     });
 }
 

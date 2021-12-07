@@ -6,7 +6,7 @@ class VoteSession(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     title = models.TextField(null=False, blank=False)
     place = models.TextField(default="", blank=True)
-    # is_mandatory = models.BooleanField(default=False)
+    is_mandatory = models.BooleanField(default=False)
     open_public = models.BooleanField(default=True)
     is_finished = models.BooleanField(default=False)
     notes = models.TextField(default="", blank=True)

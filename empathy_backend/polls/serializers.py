@@ -38,7 +38,7 @@ class AttendaceSerializer(serializers.ModelSerializer):
 class VoteSessionWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = VoteSession
-        fields = ["uuid", "title", "place", "open_public", "notes"]
+        fields = ["uuid", "title", "place", "is_mandatory", "open_public", "notes"]
         extra_kwargs = {
             "title": {"required": True},
             "place": {"required": False},
