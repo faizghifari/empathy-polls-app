@@ -55,6 +55,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>
+<script>
 
 const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 150px">`;
 function load(data) {
@@ -105,7 +111,7 @@ function load(data) {
                     );
                 else
                     $("#ep_selector_wrapper").append(
-                        `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px" data-bs-toggle="tooltip" data-bs-placement="${d.misc}">*</div>`
+                        `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px" data-bs-toggle="tooltip" data-bs-placement="bottom" title=${d.misc}>*</div>`
                     );
             }
         }
