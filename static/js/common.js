@@ -10,7 +10,6 @@ window.httpGet = async function (url) {
 window.httpPost = async function (url = '', data = {}) {
     let resp = await fetch(url, {
         method: 'POST',
-        cors: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         redirect: 'follow',
         body: JSON.stringify(data),
