@@ -1,4 +1,4 @@
-const EP_HOST = "https://empathy-polls-be.herokuapp.com";
+const EP_HOST = "https://empathy-polls.netlify.app";
 const API_HOST = "https://empathy-polls-be.herokuapp.com/polls";
 
 const API_EVENT = API_HOST + "/vote_session";
