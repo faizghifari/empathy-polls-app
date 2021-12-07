@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <html>
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=Ropa+Sans&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="./static/css/empathypoll.css" rel="stylesheet" />
     <link href="./static/css/empathytable.css" rel="stylesheet" />
     <title>EmpathyPolls</title>
@@ -44,84 +46,87 @@
                 <div class="colorBox" id="red"></div>
                 <div class="color" id="red">Cannot Attend</div>
             </div>
-        <div>
-            <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit!</button>
+            <div>
+                <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit!</button>
+            </div>
         </div>
     </div>
-</div>
 </body>
 <script src="./static/js/common.js"></script>
 <script src="./static/js/api.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 <script>
 
-const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 150px">`;
-function load(data) {
-    $("#ep_title").text(`${data.event_name} @ ${data.place}`);
-    $("#ep_desc").text(`${data.notes}`);
+    const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 150px">`;
+    function load(data) {
+        $("#ep_title").text(`${data.event_name} @ ${data.place}`);
+        $("#ep_desc").text(`${data.notes}`);
 
-    //Set width of selector wrapper first
-    $("#ep_selector_wrapper").width(data.total_slots * 150);
-
-    
-    //add date cells
-    let times = [];
-    let slotids = [];
-    for(let i = 0; i < data.slots.length; i++) {
-        let o = data.slots[i];
-        let w = o.times.length * 150;
-        let divstr = `<div class="ep-cell cell-blue cell-bd-h" style="width: ${w}px">${o.date}</div>`;
-        $("#ep_selector_wrapper").append(divstr);
-        for(let j = 0; j < o.times.length; j++) {
-            let divstr = `<div class="ep-cell cell-dgrey cell-bd-h cell-bd-t" style="width: 150px">${o.times[j]}</div>`;
-            times.push(divstr);
-            slotids.push(o.slotids[j]);
-        }
-    }
-    //add time cells 
-    times.forEach(divstr => {
-        $("#ep_selector_wrapper").append(divstr);
-    });
-
-    if(!data.is_closed) {
-        //add name cells 
-        data.voted.forEach(name => {
-            $("#ep_selector_attended").append(
-                `<div class="ep-fcell px-2 cell-name cell-lgrey cell-bd-t">${name}</div>`
-            )
-        });
+        //Set width of selector wrapper first
+        $("#ep_selector_wrapper").width(data.total_slots * 150);
 
 
-        //draw user-choice
-        for(let i=0; i < data.votes.length; i++) {
-            let o = data.votes[i]; //this is also an array of an object
-            for(let j=0; j < o.length; j++) {
-                let d = o[j];
-                console.log(d);
-                if(d.misc == "")
-                    $("#ep_selector_wrapper").append(
-                        `<div class="ep-cell cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px"></div>`
-                    );
-                else
-                    $("#ep_selector_wrapper").append(
-                        `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px" data-bs-toggle="tooltip" data-bs-placement="${d.misc}">*</div>`
-                    );
+        //add date cells
+        let times = [];
+        let slotids = [];
+        for (let i = 0; i < data.slots.length; i++) {
+            let o = data.slots[i];
+            let w = o.times.length * 150;
+            let divstr = `<div class="ep-cell cell-blue cell-bd-h" style="width: ${w}px">${o.date}</div>`;
+            $("#ep_selector_wrapper").append(divstr);
+            for (let j = 0; j < o.times.length; j++) {
+                let divstr = `<div class="ep-cell cell-dgrey cell-bd-h cell-bd-t" style="width: 150px">${o.times[j]}</div>`;
+                times.push(divstr);
+                slotids.push(o.slotids[j]);
             }
         }
-    }
+        //add time cells 
+        times.forEach(divstr => {
+            $("#ep_selector_wrapper").append(divstr);
+        });
 
-    //draw user input form
-    $("#ep_selector_attended").append(
+        if (!data.is_closed) {
+            //add name cells 
+            data.voted.forEach(name => {
+                $("#ep_selector_attended").append(
+                    `<div class="ep-fcell px-2 cell-name cell-lgrey cell-bd-t">${name}</div>`
+                )
+            });
+
+
+            //draw user-choice
+            for (let i = 0; i < data.votes.length; i++) {
+                let o = data.votes[i]; //this is also an array of an object
+                for (let j = 0; j < o.length; j++) {
+                    let d = o[j];
+                    console.log(d);
+                    if (d.misc == "")
+                        $("#ep_selector_wrapper").append(
+                            `<div class="ep-cell cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px"></div>`
+                        );
+                    else
+                        $("#ep_selector_wrapper").append(
+                            `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px" data-bs-toggle="tooltip" data-bs-placement="${d.misc}">*</div>`
+                        );
+                }
+            }
+        }
+
+        //draw user input form
+        $("#ep_selector_attended").append(
             `<div class="ep-fcell cell-dgrey cell-bd-t px-2">
                 <input type="text" id="input_name" class="form-control" placeholder="Your Name">    
             </div>`
-    )
+        )
 
-    //Add user dropdowns
-    for(let i=0; i < data.total_slots; i++) {
-        $("#ep_selector_wrapper").append(
-            `<div class="dropdown">
+        //Add user dropdowns
+        for (let i = 0; i < data.total_slots; i++) {
+            $("#ep_selector_wrapper").append(
+                `<div class="dropdown">
     <input type="hidden" class="_user_input_idx" value="${slotids[i]}">
     <input type="hidden" id="_user_select_${slotids[i]}" value="4">
     <div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t" style="width: 150px;" data-bs-toggle="dropdown" aria-expanded="false">
@@ -134,74 +139,75 @@ function load(data) {
       <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);"></a></li>
     </ul>
 </div>`
-        );
-    }
+            );
+        }
 
-    //Add user contraints
+        //Add user contraints
 
-    $("#ep_selector_attended").append(
-        `<div class="ep-fcell px-2 cell-name cell-lgrey cell-bd-t">Notes / Contraints</div>`
-    )
-    for(let i=0; i < data.total_slots; i++) {
-        $("#ep_selector_wrapper").append(
-            `<div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t px-2" style="width: 150px">
+        $("#ep_selector_attended").append(
+            `<div class="ep-fcell px-2 cell-name cell-lgrey cell-bd-t">Notes / Contraints</div>`
+        )
+        for (let i = 0; i < data.total_slots; i++) {
+            $("#ep_selector_wrapper").append(
+                `<div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t px-2" style="width: 150px">
                 <input type="text" id="_user_misc_${slotids[i]}" class="form-control" placeholder="">    
             </div>`
-        )
-    }
-    
-    
-}
-$(() => {
-    window.vote_id = location.hash.substring(1);
-    if(!window.vote_id) {
-        alert("Invalid access!");
-        history.back();
-        return;
-    }
+            )
+        }
 
-    getVoteDetail(window.vote_id)
-    .then(load)
-    .catch(() => {
-        alert("Invalid vote id");
-        history.back();
+
+    }
+    $(() => {
+        window.vote_id = location.hash.substring(1);
+        if (!window.vote_id) {
+            alert("Invalid access!");
+            history.back();
+            return;
+        }
+
+        getVoteDetail(window.vote_id)
+            .then(load)
+            .catch(() => {
+                alert("Invalid vote id");
+                history.back();
+            });
     });
-});
 
-function user_priority(o) {
-    let dd = $(o).parent().parent().parent();
-    let idx = $(dd).find("._user_input_idx")[0].value;
-    let selection = $(o).data("val");
-    let dd_cell = $(dd).find(".ep-cell");
-    
-    dd_cell.removeClass(["cell-dgrey", "cell-p1", "cell-p2", "cell-p3", "cell-p4"]);
-    dd_cell.addClass(`cell-p${selection}`);
-    $(`#_user_select_${idx}`).val(selection);
-}
+    function user_priority(o) {
+        let dd = $(o).parent().parent().parent();
+        let idx = $(dd).find("._user_input_idx")[0].value;
+        let selection = $(o).data("val");
+        let dd_cell = $(dd).find(".ep-cell");
 
-$("#btn_submit").click(() => {
-    let voter_name = $("#input_name").val();
-
-    $("#btn_submit").text("Saving...");
-
-    //get all timeslots
-    let all_indexes = $("._user_input_idx");
-    for(let i = 0; i < all_indexes.length; i++) {
-        let t_id = all_indexes[i].value;
-        let priority = $(`#_user_select_${t_id}`).val();
-        let note = $(`#_user_misc_${t_id}`).val();
-
-        console.log(window.vote_id, t_id, voter_name, priority, note);
-        (async () => await saveTimeslot(window.vote_id, t_id, voter_name, parseInt(priority), note))();
+        dd_cell.removeClass(["cell-dgrey", "cell-p1", "cell-p2", "cell-p3", "cell-p4"]);
+        dd_cell.addClass(`cell-p${selection}`);
+        $(`#_user_select_${idx}`).val(selection);
     }
-    alert("Done!");
-    location.reload();
 
-})
+    $("#btn_submit").click(() => {
+        let voter_name = $("#input_name").val();
 
-$("#bnt_end").click(() => {
-    $("#btn_end").text("Closing...");
-    // location.href = `${EP_HOST}/results.html#${resp.uuid}`;
-})
+        $("#btn_submit").text("Saving...");
+
+        //get all timeslots
+        let all_indexes = $("._user_input_idx");
+        for (let i = 0; i < all_indexes.length; i++) {
+            let t_id = all_indexes[i].value;
+            let priority = $(`#_user_select_${t_id}`).val();
+            let note = $(`#_user_misc_${t_id}`).val();
+
+            console.log(window.vote_id, t_id, voter_name, priority, note);
+            (async () => await saveTimeslot(window.vote_id, t_id, voter_name, parseInt(priority), note))();
+        }
+        alert("Done!");
+        location.reload();
+
+    })
+
+    $("#bnt_end").click(() => {
+        $("#btn_end").text("Closing...");
+        // location.href = `${EP_HOST}/results.html#${resp.uuid}`;
+    })
 </script>
+
 </html>
