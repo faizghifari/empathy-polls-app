@@ -60,6 +60,12 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>
+<script>
 
     const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 150px">`;
     function load(data) {
@@ -89,6 +95,8 @@
             $("#ep_selector_wrapper").append(divstr);
         });
 
+
+    
         if (!data.is_closed) {
             //add name cells 
             data.voted.forEach(name => {
@@ -98,21 +106,21 @@
             });
 
 
-            //draw user-choice
-            for (let i = 0; i < data.votes.length; i++) {
-                let o = data.votes[i]; //this is also an array of an object
-                for (let j = 0; j < o.length; j++) {
-                    let d = o[j];
-                    console.log(d);
-                    if (d.misc == "")
-                        $("#ep_selector_wrapper").append(
-                            `<div class="ep-cell cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px"></div>`
-                        );
-                    else
-                        $("#ep_selector_wrapper").append(
-                            `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px" data-bs-toggle="tooltip" data-bs-placement="${d.misc}">*</div>`
-                        );
-                }
+           //draw user-choice
+        for(let i=0; i < data.votes.length; i++) {
+            let o = data.votes[i]; //this is also an array of an object
+            for(let j=0; j < o.length; j++) {
+                let d = o[j];
+                console.log(d);
+                if(d.misc == "")
+                    $("#ep_selector_wrapper").append(
+                        `<div class="ep-cell cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px"></div>`
+                    );
+                else
+                    $("#ep_selector_wrapper").append(
+                        `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px" data-bs-toggle="tooltip" data-bs-placement="bottom" title=${d.misc}>*</div>`
+                    );
+            }
             }
         }
 
