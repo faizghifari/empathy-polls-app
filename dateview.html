@@ -13,6 +13,7 @@
     <div class="container">
         <div class="mg-2"></div>
         <h2 id="ep_title"></h2>
+        <button id="btn_end" type="button" class="btn btn-lg btn-primary">END POLL!</button>
         <div class="row">
             <div class="col-2" id="ep_selector_attended">
                 <div class="mg-1"></div>
@@ -25,6 +26,24 @@
                 <div class="mg-3"></div>
             </div>
         </div>
+        <div>
+            <div>COLOR KEY</div>
+            <div class="colorContainer">
+                <div class="colorBox" id="green"></div>
+                <div class="color" id="green">Most Preferred</div>
+            </div>
+            <div class="colorContainer">
+                <div class="colorBox" id="yellow"></div>
+                <div class="color" id="yellow">Okay</div>
+            </div>
+            <div class="colorContainer">
+                <div class="colorBox" id="orange"></div>
+                <div class="color" id="orange">If Necessary</div>
+            </div>
+            <div class="colorContainer">
+                <div class="colorBox" id="red"></div>
+                <div class="color" id="red">Cannot Attend</div>
+            </div>
         <div>
             <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit!</button>
         </div>
@@ -178,6 +197,11 @@ $("#btn_submit").click(() => {
     alert("Done!");
     location.reload();
 
+})
+
+$("#bnt_end").click(() => {
+    $("#btn_end").text("Closing...");
+    // location.href = `${EP_HOST}/results.html#${resp.uuid}`;
 })
 </script>
 </html>

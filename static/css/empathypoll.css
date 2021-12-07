@@ -46,3 +46,40 @@
 }
 
 .emphaty-btn:hover { text-decoration: none; color: white; }
+
+.colorContainer {
+    display: flex;
+    flex-flow: row;
+}
+
+.colorBox#green {
+    width: 25px;
+    height: 25px;
+    background-color: green;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.colorBox#yellow {
+    width: 25px;
+    height: 25px;
+    background-color: yellow;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.colorBox#orange {
+    width: 25px;
+    height: 25px;
+    background-color: orange;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.colorBox#red {
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
