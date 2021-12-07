@@ -1,15 +1,17 @@
-const EP_HOST      = "http://3.34.117.45:40208";
-const API_HOST     = "http://3.34.117.45:40207/polls";
+const EP_HOST = "https://empathy-polls-be.herokuapp.com";
+const API_HOST = "https://empathy-polls-be.herokuapp.com/polls";
 
-const API_EVENT    = API_HOST + "/vote_session";
+const API_EVENT = API_HOST + "/vote_session";
 const API_TIMESLOT = API_HOST + "/timeslot";
-const API_VOTES    = API_HOST + "/vote";
+const API_VOTES = API_HOST + "/vote";
 
-const PREFERENCES  = {"UN": 4, "LE": 3, "OK": 2, "MOST": 1,
-                      4: "UN", 3: "LE", 2: "OK", 1: "MOST"};
+const PREFERENCES = {
+    "UN": 4, "LE": 3, "OK": 2, "MOST": 1,
+    4: "UN", 3: "LE", 2: "OK", 1: "MOST"
+};
 
-const MONTHS       = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const DAYS         = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 
 if (!window.httpGet || !window.httpPost) {
@@ -35,7 +37,7 @@ async function getVoteDetail(vote_id) {
         'votes': []
     };
 
-    let [ts, s]  = parseTimeslots(vote_detail.timeslots);
+    let [ts, s] = parseTimeslots(vote_detail.timeslots);
     let [vn, vr] = parseVotes(vote_detail.votes);
 
     result.total_slots = ts;
@@ -77,13 +79,13 @@ function parseTimeslots(timeslots) {
 
 function parseVotes(votes) {
     let result = {};
-    
+
     votes.sort((x, y) => {
-        if (x.voter_name  >  y.voter_name) return  1;
-        if (x.voter_name  <  y.voter_name) return -1;
-        if (x.timeslot_id > y.timeslot_id) return  1;
+        if (x.voter_name > y.voter_name) return 1;
+        if (x.voter_name < y.voter_name) return -1;
+        if (x.timeslot_id > y.timeslot_id) return 1;
         if (x.timeslot_id < y.timeslot_id) return -1;
-        return 0;  
+        return 0;
     });
 
     for (let i = 0; i < votes.length; i++) {
