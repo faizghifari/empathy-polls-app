@@ -78,6 +78,7 @@
 
 .cell-p1 {
     background: green !important;
+    color: white;
 }
 
 .cell-p2 {
@@ -90,4 +91,5 @@
 
 .cell-p4 {
     background: red !important;
+    color: white;
 }
