@@ -48,9 +48,47 @@ async function getVoteDetail(vote_id) {
     return result;
 }
 
+async function getVoteResults(vote_id) {
+    let vote_detail = await window.httpGet(`${API_EVENT}/${vote_id}/results?format=json`);
+    let result = {};
+    if (typeof vote_detail.uuid == 'undefined') {
+        return result;
+    }
+    let formatted_ts = formatTimeslots(vote_detail.vote_results);
+    let [all_voters, vr] = parseVotes(vote_detail.votes);
+    result = {
+        'event_name': vote_detail.title,
+        'place': vote_detail.place,
+        'is_mandatory': vote_detail.is_mandatory,
+        'is_opened': vote_detail.open_public,
+        'is_finished': vote_detail.is_finished,
+        'notes': vote_detail.notes,
+        'vote_results': vote_detail.vote_results,
+        'formatted_ts': formatted_ts,
+        'max_attendance': all_voters.length
+    };
+    console.log(result);
+    return result;
+}
+
+function formatTimeslots(timeslots) {
+    let formatted_ts = [];
+    for (let i = 0; i < timeslots.length; i++) {
+        let d = new Date(timeslots[i].datetime);
+        let date = `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} (${DAYS[d.getDay()]})`;
+        let time = `${("0" + d.getHours()).slice(-2)}:${("0" + d.getMinutes()).slice(-2)}`;
+        formatted_ts.push({
+            "date": date,
+            "time": time
+        });
+    }
+    console.log(formatted_ts);
+    return formatted_ts;
+}
+
 function parseTimeslots(timeslots) {
     let result = {};
-    let slotids = {}
+    let slotids = {};
 
     for (let i = 0; i < timeslots.length; i++) {
         let d = new Date(timeslots[i].datetime);
