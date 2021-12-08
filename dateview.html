@@ -16,7 +16,7 @@
         <div class="mg-2"></div>
         <h2 id="ep_title"></h2>
         <h3 id="ep_desc"></h3>
-        <button id="btn_end" type="button" class="btn btn-lg btn-primary">END POLL!</button>
+        <button id="btn_end" type="button" class="btn btn-lg btn-primary">End Poll</button>
         <div class="row">
             <div class="col-2" id="ep_selector_attended">
                 <div class="mg-1"></div>
@@ -30,25 +30,8 @@
             </div>
         </div>
         <div>
-            <div>COLOR KEY</div>
-            <div class="colorContainer">
-                <div class="colorBox" id="green"></div>
-                <div class="color" id="green">Most Preferred</div>
-            </div>
-            <div class="colorContainer">
-                <div class="colorBox" id="yellow"></div>
-                <div class="color" id="yellow">Okay</div>
-            </div>
-            <div class="colorContainer">
-                <div class="colorBox" id="orange"></div>
-                <div class="color" id="orange">If Necessary</div>
-            </div>
-            <div class="colorContainer">
-                <div class="colorBox" id="red"></div>
-                <div class="color" id="red">Cannot Attend</div>
-            </div>
             <div>
-                <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit!</button>
+                <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit</button>
             </div>
         </div>
     </div>
@@ -136,10 +119,10 @@
         Select ▼
     </div>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);"></a></li>
-      <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);"></a></li>
-      <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);"></a></li>
-      <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);"></a></li>
+      <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);">Most Preferred</a></li>
+      <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);">Just Okay</a></li>
+      <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);">If Necessary</a></li>
+      <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);">Cannot Attend</a></li>
     </ul>
 </div>`
             );
@@ -211,9 +194,19 @@
 
     })
 
-    $("#bnt_end").click(() => {
+    $("#btn_end").click(() => {
         $("#btn_end").text("Closing...");
-        // location.href = `${EP_HOST}/results.html#${resp.uuid}`;
+        window.vote_id = location.hash.substring(1);
+        getVoteDetail(window.vote_id)
+            .then(resp => {
+                console.log(resp)
+                if (resp.votes.length == 0) {
+                    alert("Failed to aggregate results");
+                    $("#btn_end").text("End Poll");
+                    return;
+                }
+                location.href = `${EP_HOST}/results.html#${window.vote_id}`;
+            })
     })
 </script>
 
