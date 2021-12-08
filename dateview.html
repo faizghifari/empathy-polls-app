@@ -15,6 +15,7 @@
     <div class="container">
         <div class="mg-2"></div>
         <h2 id="ep_title"></h2>
+        <h3 id="ep_desc"></h3>
         <button id="btn_end" type="button" class="btn btn-lg btn-primary">END POLL!</button>
         <div class="row">
             <div class="col-2" id="ep_selector_attended">
@@ -70,7 +71,7 @@
     const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 150px">`;
     function load(data) {
         $("#ep_title").text(`${data.event_name} @ ${data.place}`);
-        $("#ep_desc").text(`${data.notes}`);
+        $("#ep_desc").text("Notes: " + `${data.notes}`);
 
         //Set width of selector wrapper first
         $("#ep_selector_wrapper").width(data.total_slots * 150);
