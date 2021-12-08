@@ -89,7 +89,6 @@
                 let o = data.votes[i]; //this is also an array of an object
                 for (let j = 0; j < o.length; j++) {
                     let d = o[j];
-                    console.log(d);
                     if (d.misc == "")
                         $("#ep_selector_wrapper").append(
                             `<div class="ep-cell cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px"></div>`
@@ -186,7 +185,6 @@
             let priority = $(`#_user_select_${t_id}`).val();
             let note = $(`#_user_misc_${t_id}`).val();
 
-            console.log(window.vote_id, t_id, voter_name, priority, note);
             (async () => await saveTimeslot(window.vote_id, t_id, voter_name, parseInt(priority), note))();
         }
         alert("Done!");
@@ -199,7 +197,6 @@
         window.vote_id = location.hash.substring(1);
         getVoteDetail(window.vote_id)
             .then(resp => {
-                console.log(resp)
                 if (resp.votes.length == 0) {
                     alert("Failed to aggregate results");
                     $("#btn_end").text("End Poll");
