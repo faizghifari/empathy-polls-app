@@ -62,6 +62,10 @@
             window.vote_id = location.hash.substring(1);
             getVoteDetail(vote_id)
                 .then(resp => {
+                    if (resp.votes.length > 0) {
+                        alert("Cannot add new timeslot: session already voted");
+                        history.back();
+                    }
                     $("#ep_title").text(`${resp.event_name} @ ${resp.place}`);
                     updateDatelist();
                 })
@@ -86,8 +90,16 @@
         })
 
         $("#btn_share").click(() => {
-            prompt("Here is a link for sharing your event!", `${EP_HOST}/dateview.html#${window.vote_id}`);
-            window.open(`${EP_HOST}/dateview.html#${window.vote_id}`);
+            window.vote_id = location.hash.substring(1);
+            getVoteDetail(window.vote_id)
+                .then(resp => {
+                    if (resp.total_slots == 0) {
+                        alert("Cannot proceed without any added timeslot");
+                        return;
+                    }
+                    prompt("Here is a link for sharing your event!", `${EP_HOST}/dateview.html#${window.vote_id}`);
+                    window.open(`${EP_HOST}/dateview.html#${window.vote_id}`);
+                })
         });
     </script>
 </body>
