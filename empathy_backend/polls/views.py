@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 from django.shortcuts import redirect
 
 from rest_framework import viewsets
@@ -67,8 +69,9 @@ class VoteSessionViewSet(viewsets.ModelViewSet):
                     ts["attendance"].append(AttendaceSerializer(attendee).data)
         vote_results = sorted(
             vote_results,
-            key=lambda i: i["count_vote", "count_most", "count_okay", "count_least"],
+            key=itemgetter("count_vote", "count_most", "count_okay", "count_least"),
             reverse=True,
         )
+        # ,lambda i: i["count_vote", "count_most", "count_okay", "count_least"],
         results["vote_results"] = vote_results
         return Response(results)
