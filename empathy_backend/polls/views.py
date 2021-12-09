@@ -72,6 +72,5 @@ class VoteSessionViewSet(viewsets.ModelViewSet):
             key=itemgetter("count_vote", "count_most", "count_okay", "count_least"),
             reverse=True,
         )
-        # ,lambda i: i["count_vote", "count_most", "count_okay", "count_least"],
         results["vote_results"] = vote_results
         return Response(results)
