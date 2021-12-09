@@ -112,18 +112,18 @@
         for (let i = 0; i < data.total_slots; i++) {
             $("#ep_selector_wrapper").append(
                 `<div class="dropdown">
-    <input type="hidden" class="_user_input_idx" value="${slotids[i]}">
-    <input type="hidden" id="_user_select_${slotids[i]}" value="4">
-    <div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t" style="width: 150px;" data-bs-toggle="dropdown" aria-expanded="false">
-        Select ▼
-    </div>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);">Most Preferred</a></li>
-      <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);">Just Okay</a></li>
-      <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);">If Necessary</a></li>
-      <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);">Cannot Attend</a></li>
-    </ul>
-</div>`
+                    <input type="hidden" class="_user_input_idx" value="${slotids[i]}">
+                    <input type="hidden" id="_user_select_${slotids[i]}" value="4">
+                    <div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t" style="width: 150px;" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select ▼
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);">Most Preferred</a></li>
+                        <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);">Just Okay</a></li>
+                        <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);">If Necessary</a></li>
+                        <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);">Cannot Attend</a></li>
+                    </ul>
+                </div>`
             );
         }
 

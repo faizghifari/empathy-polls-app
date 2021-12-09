@@ -1,3 +1,7 @@
+function wait(delay) {
+    return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
 window.httpGet = async function (url) {
     let resp = await fetch(url, {
         method: 'GET',
@@ -15,5 +19,15 @@ window.httpPost = async function (url = '', data = {}) {
         body: JSON.stringify(data),
     });
     console.log(resp);
+    if (resp.status == 500) {
+        wait(1000).then(() => {
+            resp = fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                redirect: 'follow',
+                body: JSON.stringify(data),
+            });
+        })
+    }
     return await resp.json();
 }
