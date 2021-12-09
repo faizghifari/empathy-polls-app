@@ -133,4 +133,4 @@ CORS_ALLOW_CREDENTIALS = False
 # Django Heroku
 import django_heroku
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), databases=False)
