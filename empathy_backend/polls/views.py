@@ -50,12 +50,25 @@ class VoteSessionViewSet(viewsets.ModelViewSet):
         vote_results = results["timeslots"].copy()
         for ts in vote_results:
             ts["count_vote"] = 0
+            ts["count_most"] = 0
+            ts["count_okay"] = 0
+            ts["count_least"] = 0
             ts["attendance"] = []
             for v in serialized_session.data["votes"]:
                 if v["preferences"] != "UN" and v["timeslot_id"] == ts["id"]:
                     ts["count_vote"] += 1
+                    if v["preferences"] == "MOST":
+                        ts["count_most"] += 1
+                    elif v["preferences"] == "OK":
+                        ts["count_okay"] += 1
+                    elif v["preferences"] == "LE":
+                        ts["count_least"] += 1
                     attendee = Vote.objects.get(pk=v["id"])
                     ts["attendance"].append(AttendaceSerializer(attendee).data)
-        vote_results = sorted(vote_results, key=lambda i: i["count_vote"], reverse=True)
+        vote_results = sorted(
+            vote_results,
+            key=lambda i: i["count_vote", "count_most", "count_okay", "count_least"],
+            reverse=True,
+        )
         results["vote_results"] = vote_results
         return Response(results)
