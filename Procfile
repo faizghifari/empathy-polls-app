@@ -1,2 +1,2 @@
 release: python empathy_backend/manage.py migrate
-web: python empathy_backend/manage.py runserver 0.0.0.0:$PORT
+web: bin/start-pgbouncer-stunnel python empathy_backend/manage.py runserver 0.0.0.0:$PORT
