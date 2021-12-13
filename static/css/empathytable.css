@@ -66,7 +66,7 @@
 .dropdown-menu {
     background: none !important;
     border: none !important;
-    width: 150px;
+    width: 175px;
     min-width: unset;
     transform: translateY(45px) !important;
     z-index:1000000;
@@ -77,19 +77,19 @@
 }
 
 .cell-p1 {
-    background: green !important;
+    background: #28B463 !important;
     color: white;
 }
 
 .cell-p2 {
-    background: yellow !important;
+    background: #FFC300!important;
 }
 
 .cell-p3 {
-    background: orange !important;
+    background: #FF5733 !important;
 }
 
 .cell-p4 {
-    background: red !important;
+    background: #C70039 !important;
     color: white;
 }

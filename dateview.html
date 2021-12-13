@@ -19,7 +19,12 @@
         <button id="btn_end" type="button" class="btn btn-lg btn-primary">End Poll</button>
         <div class="row">
             <div class="col-2" id="ep_selector_attended">
-                <div class="mg-1"></div>
+                <div class="mg-1">
+                <!-- <div class="ep-cell cell-blue cell-bd-h" style="width: 175px;user-select: auto;">Dec 6, 2021 (Mon)</div>
+                <div class="ep-cell cell-p3 cell-bd-t cell-bd-h" style="width: 175px; user-select: auto;"></div>
+                <div class="ep-cell cell-p2 cell-bd-t cell-bd-h" style="width: 175px; user-select: auto;"></div>
+                <div class="ep-cell cell-center ep-tooltip cell-p4 cell-bd-t cell-bd-h" style="width: 175px; user-select: auto;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="too early">*</div>
+                <div class="ep-cell cell-p1 cell-bd-t cell-bd-h" style="width: 175px; user-select: auto;"></div></div> -->
                 <div class="mg-1"></div>
             </div>
             <div class="col-10 of-x">
@@ -30,6 +35,25 @@
             </div>
         </div>
         <div>
+            <div>
+                <div>COLOR KEY</div>
+                <div class="colorContainer">
+                    <div class="colorBox" id="green"></div>
+                    <div class="color" id="green">Most Preferred</div>
+                </div>
+                <div class="colorContainer">
+                    <div class="colorBox" id="yellow"></div>
+                    <div class="color" id="yellow">Okay</div>
+                </div>
+                <div class="colorContainer">
+                    <div class="colorBox" id="orange"></div>
+                    <div class="color" id="orange">If Necessary</div>
+                </div>
+                <div class="colorContainer">
+                    <div class="colorBox" id="red"></div>
+                    <div class="color" id="red">Cannot Attend</div>
+                </div>
+                <div>Hover over <span>*</span> to see other's notes!</div>
             <div>
                 <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit</button>
             </div>
@@ -45,13 +69,13 @@
     crossorigin="anonymous"></script>
 <script>
 
-    const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 150px">`;
+    const unavail_cell = `<div class="ep-cell cell-unavail cell-bd-h cell-bd-t" style="width: 175px">`;
     function load(data) {
         $("#ep_title").text(`${data.event_name} @ ${data.place}`);
         $("#ep_desc").text("Notes: " + `${data.notes}`);
 
         //Set width of selector wrapper first
-        $("#ep_selector_wrapper").width(data.total_slots * 150);
+        $("#ep_selector_wrapper").width(data.total_slots * 175);
 
 
         //add date cells
@@ -59,11 +83,11 @@
         let slotids = [];
         for (let i = 0; i < data.slots.length; i++) {
             let o = data.slots[i];
-            let w = o.times.length * 150;
+            let w = o.times.length * 175;
             let divstr = `<div class="ep-cell cell-blue cell-bd-h" style="width: ${w}px">${o.date}</div>`;
             $("#ep_selector_wrapper").append(divstr);
             for (let j = 0; j < o.times.length; j++) {
-                let divstr = `<div class="ep-cell cell-dgrey cell-bd-h cell-bd-t" style="width: 150px">${o.times[j]}</div>`;
+                let divstr = `<div class="ep-cell cell-dgrey cell-bd-h cell-bd-t" style="width: 175px">${o.times[j]}</div>`;
                 times.push(divstr);
                 slotids.push(o.slotids[j]);
             }
@@ -91,11 +115,11 @@
                     let d = o[j];
                     if (d.misc == "")
                         $("#ep_selector_wrapper").append(
-                            `<div class="ep-cell cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px"></div>`
+                            `<div class="ep-cell cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 175px"></div>`
                         );
                     else
                         $("#ep_selector_wrapper").append(
-                            `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 150px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${d.misc}">*</div>`
+                            `<div class="ep-cell cell-center ep-tooltip cell-p${d.priority} cell-bd-t cell-bd-h" style="width: 175px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${d.misc}">*</div>`
                         );
                 }
             }
@@ -114,14 +138,14 @@
                 `<div class="dropdown">
                     <input type="hidden" class="_user_input_idx" value="${slotids[i]}">
                     <input type="hidden" id="_user_select_${slotids[i]}" value="4">
-                    <div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t" style="width: 150px;" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t" style="width: 175px;" data-bs-toggle="dropdown" aria-expanded="false">
                         Select ▼
                     </div>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);">Most Preferred</a></li>
-                        <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);">Just Okay</a></li>
-                        <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);">If Necessary</a></li>
-                        <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);">Cannot Attend</a></li>
+                        <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);"></a></li>
+                        <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);"></a></li>
+                        <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);"></a></li>
+                        <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);"></a></li>
                     </ul>
                 </div>`
             );
@@ -134,7 +158,7 @@
         )
         for (let i = 0; i < data.total_slots; i++) {
             $("#ep_selector_wrapper").append(
-                `<div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t px-2" style="width: 150px">
+                `<div class="ep-cell cell-dgrey cell-center cell-bd-h cell-bd-t px-2" style="width: 175px">
                 <input type="text" id="_user_misc_${slotids[i]}" class="form-control" placeholder="">    
             </div>`
             )

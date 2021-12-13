@@ -55,7 +55,7 @@
 .colorBox#green {
     width: 25px;
     height: 25px;
-    background-color: green;
+    background-color:#28B463;
     margin-right: 10px;
     margin-bottom: 15px;
 }
@@ -63,7 +63,7 @@
 .colorBox#yellow {
     width: 25px;
     height: 25px;
-    background-color: yellow;
+    background-color: #FFC300;
     margin-right: 10px;
     margin-bottom: 15px;
 }
@@ -71,7 +71,7 @@
 .colorBox#orange {
     width: 25px;
     height: 25px;
-    background-color: orange;
+    background-color:#FF5733;
     margin-right: 10px;
     margin-bottom: 15px;
 }
@@ -79,9 +79,15 @@
 .colorBox#red {
     width: 25px;
     height: 25px;
-    background-color: red;
+    background-color: #C70039;
     margin-right: 10px;
     margin-bottom: 30px;
+}
+
+span {
+font-size: 30px;
+margin: 0 10px;
+vertical-align: -webkit-baseline-middle;
 }
 
 .col-3, .col-6 {
