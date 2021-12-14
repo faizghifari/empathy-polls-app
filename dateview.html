@@ -12,8 +12,7 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="mg-2"></div>
+    <div class="container" style="margin-top: 2rem;">
         <h2 id="ep_title"></h2>
         <h3 id="ep_desc"></h3>
         <button id="btn_end" type="button" class="btn btn-lg btn-primary">End Poll</button>
@@ -25,32 +24,39 @@
             <div class="col-10 of-x">
                 <div id="ep_selector_wrapper">
                 </div>
-                <div class="mg-2"></div>
-                <div class="mg-3"></div>
             </div>
         </div>
-        <div>
-            <div>
-                <div>COLOR KEY</div>
+        <div class="row" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <div class=" col-sm-1">COLOR KEY</div>
+            <div class="col-sm-auto" style="margin-left: 2rem">
                 <div class="colorContainer">
                     <div class="colorBox" id="green"></div>
                     <div class="color" id="green">Most Preferred</div>
                 </div>
+            </div>
+            <div class="col-sm-auto" style="margin-left: 2rem">
                 <div class="colorContainer">
                     <div class="colorBox" id="yellow"></div>
                     <div class="color" id="yellow">Okay</div>
                 </div>
+            </div>
+            <div class="col-sm-auto" style="margin-left: 2rem">
                 <div class="colorContainer">
                     <div class="colorBox" id="orange"></div>
                     <div class="color" id="orange">If Necessary</div>
                 </div>
+            </div>
+            <div class="col-sm-auto" style="margin-left: 2rem">
                 <div class="colorContainer">
                     <div class="colorBox" id="red"></div>
                     <div class="color" id="red">Cannot Attend</div>
                 </div>
-                <div>Hover over <span>*</span> to see other's notes!</div>
-            <div>
+            </div>
+            <div class="col-sm" style="text-align: right;">
                 <button id="btn_submit" type="button" class="btn btn-lg btn-primary">Submit</button>
+            </div>
+            <div>
+                Hover over <span>*</span> to see other's notes!
             </div>
         </div>
     </div>
@@ -137,10 +143,10 @@
                         Select ▼
                     </div>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);"></a></li>
-                        <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);"></a></li>
-                        <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);"></a></li>
-                        <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);"></a></li>
+                        <li><a class="dropdown-item cell-p1" data-val="1" onclick="user_priority(this);">Most Preferred</a></li>
+                        <li><a class="dropdown-item cell-p2" data-val="2" onclick="user_priority(this);">Okay</a></li>
+                        <li><a class="dropdown-item cell-p3" data-val="3" onclick="user_priority(this);">If Necessary</a></li>
+                        <li><a class="dropdown-item cell-p4" data-val="4" onclick="user_priority(this);">Cannot Attend</a></li>
                     </ul>
                 </div>`
             );
